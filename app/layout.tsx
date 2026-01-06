@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import AppWrapper from "@/components/AppWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,13 +31,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider>
-          <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-            <Navbar />
-            <main className="flex-1 pt-16">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <AppWrapper>
+            {children}
+          </AppWrapper>
           <Toaster
             position="bottom-right"
             toastOptions={{
