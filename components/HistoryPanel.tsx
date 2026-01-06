@@ -1,8 +1,9 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, Trash2, Copy, ChevronRight } from 'lucide-react';
+import { X, Clock, Trash2, Copy, ChevronRight, FileText } from 'lucide-react';
 import { HistoryItem } from '@/hooks/useHistory';
+import EmptyState from '@/components/EmptyState';
 import toast from 'react-hot-toast';
 
 interface HistoryPanelProps {
@@ -93,15 +94,11 @@ export default function HistoryPanel({
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4" style={{ maxHeight: 'calc(100vh - 160px)' }}>
               {history.length === 0 ? (
-                <div className="text-center py-12">
-                  <Clock className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-500 dark:text-gray-400">
-                    No prompts generated yet
-                  </p>
-                  <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
-                    Your generated prompts will appear here
-                  </p>
-                </div>
+                <EmptyState
+                  icon={FileText}
+                  title="No prompts yet"
+                  description="Your generated prompts will appear here. Start creating to build your history!"
+                />
               ) : (
                 <div className="space-y-3">
                   {history.map((item) => (
