@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HistoryPanel from '@/components/HistoryPanel';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ScrollToTop from '@/components/ScrollToTop';
 import { FormData } from '@/types';
 
 interface AppWrapperProps {
@@ -90,6 +91,9 @@ export default function AppWrapper({ children }: AppWrapperProps) {
 
       {/* Loading Spinner */}
       {isLoading && <LoadingSpinner />}
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </AppContext.Provider>
   );
 }
