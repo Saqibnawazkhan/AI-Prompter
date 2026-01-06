@@ -3,17 +3,29 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
+import TemplateSelector from '@/components/TemplateSelector';
 import StepWizard from '@/components/StepWizard';
 import PromptOutput from '@/components/PromptOutput';
 import { FormData } from '@/types';
 
-type AppState = 'hero' | 'form' | 'output';
+type AppState = 'hero' | 'templates' | 'form' | 'output';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('hero');
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
+  const [templateData, setTemplateData] = useState<Partial<FormData> | undefined>();
 
   const handleGetStarted = () => {
+    setAppState('templates');
+  };
+
+  const handleSelectTemplate = (data: Partial<FormData>) => {
+    setTemplateData(data);
+    setAppState('form');
+  };
+
+  const handleSkipTemplates = () => {
+    setTemplateData(undefined);
     setAppState('form');
   };
 
@@ -26,6 +38,7 @@ export default function Home() {
   const handleReset = () => {
     setAppState('hero');
     setGeneratedPrompt('');
+    setTemplateData(undefined);
   };
 
   return (
@@ -42,6 +55,21 @@ export default function Home() {
           </motion.div>
         )}
 
+        {appState === 'templates' && (
+          <motion.div
+            key="templates"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="py-12"
+          >
+            <TemplateSelector
+              onSelectTemplate={handleSelectTemplate}
+              onSkip={handleSkipTemplates}
+            />
+          </motion.div>
+        )}
+
         {appState === 'form' && (
           <motion.div
             key="form"
@@ -50,7 +78,10 @@ export default function Home() {
             exit={{ opacity: 0, y: -20 }}
             className="py-12 px-4"
           >
-            <StepWizard onComplete={handleGeneratePrompt} />
+            <StepWizard
+              onComplete={handleGeneratePrompt}
+              initialData={templateData}
+            />
           </motion.div>
         )}
 
