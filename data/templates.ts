@@ -1,0 +1,170 @@
+import { FormData } from '@/types';
+
+export interface Template {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  data: Partial<FormData>;
+}
+
+export const templates: Template[] = [
+  {
+    id: 'ecommerce',
+    name: 'E-Commerce Store',
+    description: 'Online shopping platform with cart & checkout',
+    icon: '🛒',
+    color: 'from-orange-500 to-red-500',
+    data: {
+      appType: 'Web App',
+      platform: 'Next.js',
+      appPurpose: 'An online e-commerce platform where users can browse products, add items to cart, and complete purchases securely.',
+      targetUsers: 'Online shoppers, retail businesses',
+      coreFeatures: '- Product catalog with categories\n- Shopping cart functionality\n- Secure checkout process\n- User accounts and order history\n- Product search and filters\n- Admin dashboard for inventory',
+      optionalFeatures: '- Wishlist\n- Product reviews and ratings\n- Discount codes and promotions\n- Email notifications\n- Multiple payment methods',
+      authentication: 'Yes',
+      database: 'PostgreSQL',
+      designPreferences: 'Modern, clean e-commerce design with product focus',
+      complexityLevel: 'Advanced',
+    },
+  },
+  {
+    id: 'saas',
+    name: 'SaaS Dashboard',
+    description: 'Software as a Service with analytics',
+    icon: '📊',
+    color: 'from-blue-500 to-cyan-500',
+    data: {
+      appType: 'Web App',
+      platform: 'Next.js',
+      appPurpose: 'A SaaS platform with user dashboard, analytics, and subscription management for B2B customers.',
+      targetUsers: 'Business users, teams, enterprises',
+      coreFeatures: '- User dashboard with metrics\n- Team management\n- Analytics and reporting\n- Subscription billing\n- API access\n- Settings and preferences',
+      optionalFeatures: '- Custom reports\n- White-labeling\n- Integrations with third-party tools\n- Activity logs\n- Export functionality',
+      authentication: 'Yes',
+      database: 'PostgreSQL',
+      designPreferences: 'Professional, data-focused with clean charts',
+      complexityLevel: 'Advanced',
+    },
+  },
+  {
+    id: 'social',
+    name: 'Social Media App',
+    description: 'Social platform with posts & messaging',
+    icon: '💬',
+    color: 'from-pink-500 to-purple-500',
+    data: {
+      appType: 'Mobile App',
+      platform: 'React Native',
+      appPurpose: 'A social media application where users can share posts, follow others, and communicate through messaging.',
+      targetUsers: 'General users, content creators',
+      coreFeatures: '- User profiles\n- Post creation (text, images, videos)\n- News feed\n- Follow/unfollow users\n- Like and comment on posts\n- Direct messaging',
+      optionalFeatures: '- Stories feature\n- Push notifications\n- Content discovery\n- Hashtags and trending\n- Account verification',
+      authentication: 'Yes',
+      database: 'Firebase',
+      designPreferences: 'Modern, engaging, mobile-first design',
+      complexityLevel: 'Advanced',
+    },
+  },
+  {
+    id: 'blog',
+    name: 'Blog Platform',
+    description: 'Content publishing with CMS',
+    icon: '📝',
+    color: 'from-green-500 to-teal-500',
+    data: {
+      appType: 'Web App',
+      platform: 'Next.js',
+      appPurpose: 'A blogging platform where writers can create, publish, and manage their articles with a built-in CMS.',
+      targetUsers: 'Writers, bloggers, content creators',
+      coreFeatures: '- Article creation with rich editor\n- Categories and tags\n- Author profiles\n- Comment system\n- SEO optimization\n- Reading list',
+      optionalFeatures: '- Newsletter subscription\n- Social sharing\n- Analytics dashboard\n- Multiple authors\n- Scheduled publishing',
+      authentication: 'Yes',
+      database: 'MongoDB',
+      designPreferences: 'Clean, readable, typography-focused',
+      complexityLevel: 'Intermediate',
+    },
+  },
+  {
+    id: 'todo',
+    name: 'Task Manager',
+    description: 'Productivity app with projects & tasks',
+    icon: '✅',
+    color: 'from-indigo-500 to-blue-500',
+    data: {
+      appType: 'Web App',
+      platform: 'React',
+      appPurpose: 'A task management application to help users organize their work with projects, tasks, and deadlines.',
+      targetUsers: 'Professionals, students, teams',
+      coreFeatures: '- Create and manage tasks\n- Project organization\n- Due dates and reminders\n- Priority levels\n- Task completion tracking\n- Drag and drop interface',
+      optionalFeatures: '- Calendar view\n- Team collaboration\n- Recurring tasks\n- Time tracking\n- Mobile app',
+      authentication: 'Yes',
+      database: 'Supabase',
+      designPreferences: 'Minimal, focused, productivity-oriented',
+      complexityLevel: 'Intermediate',
+    },
+  },
+  {
+    id: 'portfolio',
+    name: 'Portfolio Website',
+    description: 'Personal/agency showcase site',
+    icon: '🎨',
+    color: 'from-purple-500 to-pink-500',
+    data: {
+      appType: 'Web App',
+      platform: 'Next.js',
+      appPurpose: 'A portfolio website to showcase projects, skills, and professional work for freelancers or agencies.',
+      targetUsers: 'Designers, developers, freelancers',
+      coreFeatures: '- Project showcase gallery\n- About section\n- Skills and services\n- Contact form\n- Responsive design\n- Animations',
+      optionalFeatures: '- Blog section\n- Testimonials\n- Case studies\n- Resume download\n- Social links',
+      authentication: 'No',
+      database: 'None',
+      designPreferences: 'Creative, visually striking, modern',
+      complexityLevel: 'Basic',
+    },
+  },
+  {
+    id: 'fitness',
+    name: 'Fitness Tracker',
+    description: 'Health & workout tracking app',
+    icon: '💪',
+    color: 'from-red-500 to-orange-500',
+    data: {
+      appType: 'Mobile App',
+      platform: 'Flutter',
+      appPurpose: 'A fitness tracking app to log workouts, track progress, and achieve health goals.',
+      targetUsers: 'Fitness enthusiasts, gym-goers, athletes',
+      coreFeatures: '- Workout logging\n- Exercise library\n- Progress charts\n- Goal setting\n- Personal records\n- Workout history',
+      optionalFeatures: '- Nutrition tracking\n- Social features\n- Workout plans\n- Integration with wearables\n- Achievements and badges',
+      authentication: 'Yes',
+      database: 'Firebase',
+      designPreferences: 'Energetic, motivating, easy to use',
+      complexityLevel: 'Intermediate',
+    },
+  },
+  {
+    id: 'ai-chat',
+    name: 'AI Chatbot',
+    description: 'Conversational AI assistant',
+    icon: '🤖',
+    color: 'from-cyan-500 to-blue-500',
+    data: {
+      appType: 'Web App',
+      platform: 'Next.js',
+      appPurpose: 'An AI-powered chatbot application that can answer questions, help with tasks, and have natural conversations.',
+      targetUsers: 'General users, businesses, customer support',
+      coreFeatures: '- Chat interface\n- AI conversation handling\n- Chat history\n- Context awareness\n- Code highlighting\n- Markdown rendering',
+      optionalFeatures: '- Voice input\n- Multiple AI models\n- Custom personas\n- Export conversations\n- API integration',
+      authentication: 'Yes',
+      database: 'MongoDB',
+      aiFeatures: 'OpenAI GPT integration for natural language processing and response generation',
+      designPreferences: 'Clean, chat-focused, modern messaging UI',
+      complexityLevel: 'Intermediate',
+    },
+  },
+];
+
+export function getTemplateById(id: string): Template | undefined {
+  return templates.find(t => t.id === id);
+}
