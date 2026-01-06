@@ -7,6 +7,7 @@ import HowItWorks from './HowItWorks';
 import FeaturesSection from './FeaturesSection';
 import CTA from './CTA';
 import Testimonials from './Testimonials';
+import FAQ from './FAQ';
 
 interface HeroProps {
   onGetStarted: () => void;
@@ -138,6 +139,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
       <HowItWorks />
       <FeaturesSection />
       <Testimonials />
+      <FAQ />
       <CTA onGetStarted={onGetStarted} />
     </>
   );
