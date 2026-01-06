@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import TemplateSelector from '@/components/TemplateSelector';
 import StepWizard from '@/components/StepWizard';
 import PromptOutput from '@/components/PromptOutput';
 import { FormData } from '@/types';
+import { useApp } from '@/components/AppWrapper';
 
 type AppState = 'hero' | 'templates' | 'form' | 'output';
 
@@ -14,6 +15,19 @@ export default function Home() {
   const [appState, setAppState] = useState<AppState>('hero');
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
   const [templateData, setTemplateData] = useState<Partial<FormData> | undefined>();
+  const [currentFormData, setCurrentFormData] = useState<FormData | null>(null);
+
+  const { addToHistory, showLoading, hideLoading, fireConfetti, selectedHistoryItem, clearSelectedHistoryItem } = useApp();
+
+  // Handle viewing history item
+  useEffect(() => {
+    if (selectedHistoryItem) {
+      setGeneratedPrompt(selectedHistoryItem.prompt);
+      setCurrentFormData(selectedHistoryItem.formData);
+      setAppState('output');
+      clearSelectedHistoryItem();
+    }
+  }, [selectedHistoryItem, clearSelectedHistoryItem]);
 
   const handleGetStarted = () => {
     setAppState('templates');
@@ -29,16 +43,33 @@ export default function Home() {
     setAppState('form');
   };
 
-  const handleGeneratePrompt = (formData: FormData) => {
+  const handleGeneratePrompt = async (formData: FormData) => {
+    showLoading();
+
+    // Simulate a small delay for effect
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     const prompt = generatePrompt(formData);
     setGeneratedPrompt(prompt);
+    setCurrentFormData(formData);
+
+    // Save to history
+    addToHistory(formData, prompt);
+
+    hideLoading();
     setAppState('output');
+
+    // Fire confetti celebration
+    setTimeout(() => {
+      fireConfetti();
+    }, 300);
   };
 
   const handleReset = () => {
     setAppState('hero');
     setGeneratedPrompt('');
     setTemplateData(undefined);
+    setCurrentFormData(null);
   };
 
   return (
