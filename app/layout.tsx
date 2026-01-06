@@ -15,10 +15,18 @@ export const metadata: Metadata = {
   description: "Transform your app ideas into structured, professional AI prompts. Perfect for developers, students, and product managers using ChatGPT, Claude, or any AI coding assistant.",
   keywords: ["AI", "prompt generator", "ChatGPT", "Claude", "development", "coding", "app builder"],
   authors: [{ name: "Saqib Nawaz Khan" }],
+  manifest: "/manifest.json",
+  themeColor: "#667eea",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   openGraph: {
     title: "AI Prompter - Generate Professional AI Development Prompts",
     description: "Transform your app ideas into structured, professional AI prompts.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Prompter - Generate Professional AI Development Prompts",
+    description: "Transform your app ideas into structured, professional AI prompts.",
   },
 };
 
