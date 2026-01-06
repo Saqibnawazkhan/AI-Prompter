@@ -15,6 +15,7 @@ import { FormData } from '@/types';
 
 interface StepWizardProps {
   onComplete: (data: FormData) => void;
+  initialData?: Partial<FormData>;
 }
 
 const appTypes = [
@@ -32,27 +33,27 @@ const platforms = {
 const databases = ['None', 'Firebase', 'MongoDB', 'PostgreSQL', 'MySQL', 'Supabase', 'SQLite'];
 const complexities = ['Basic', 'Intermediate', 'Advanced'];
 
-export default function StepWizard({ onComplete }: StepWizardProps) {
+export default function StepWizard({ onComplete, initialData }: StepWizardProps) {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
 
   const [formData, setFormData] = useState<FormData>({
-    appType: '',
-    platform: '',
-    appName: '',
-    appPurpose: '',
-    targetUsers: '',
-    coreFeatures: '',
-    optionalFeatures: '',
-    designPreferences: '',
-    authentication: 'No',
-    database: 'None',
-    aiFeatures: '',
-    apisIntegrations: '',
-    performanceRequirements: '',
-    securityRequirements: '',
-    deploymentPreference: '',
-    complexityLevel: 'Basic',
+    appType: initialData?.appType || '',
+    platform: initialData?.platform || '',
+    appName: initialData?.appName || '',
+    appPurpose: initialData?.appPurpose || '',
+    targetUsers: initialData?.targetUsers || '',
+    coreFeatures: initialData?.coreFeatures || '',
+    optionalFeatures: initialData?.optionalFeatures || '',
+    designPreferences: initialData?.designPreferences || '',
+    authentication: initialData?.authentication || 'No',
+    database: initialData?.database || 'None',
+    aiFeatures: initialData?.aiFeatures || '',
+    apisIntegrations: initialData?.apisIntegrations || '',
+    performanceRequirements: initialData?.performanceRequirements || '',
+    securityRequirements: initialData?.securityRequirements || '',
+    deploymentPreference: initialData?.deploymentPreference || '',
+    complexityLevel: initialData?.complexityLevel || 'Basic',
   });
 
   const updateField = (field: keyof FormData, value: string) => {
