@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import TemplateSelector from '@/components/TemplateSelector';
 import StepWizard from '@/components/StepWizard';
 import PromptOutput from '@/components/PromptOutput';
+import PageTransition from '@/components/PageTransition';
 import { FormData } from '@/types';
 import { useApp } from '@/components/AppWrapper';
 
@@ -87,45 +88,27 @@ export default function Home() {
         )}
 
         {appState === 'templates' && (
-          <motion.div
-            key="templates"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="py-12"
-          >
+          <PageTransition key="templates" className="py-12">
             <TemplateSelector
               onSelectTemplate={handleSelectTemplate}
               onSkip={handleSkipTemplates}
             />
-          </motion.div>
+          </PageTransition>
         )}
 
         {appState === 'form' && (
-          <motion.div
-            key="form"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="py-12 px-4"
-          >
+          <PageTransition key="form" className="py-12 px-4">
             <StepWizard
               onComplete={handleGeneratePrompt}
               initialData={templateData}
             />
-          </motion.div>
+          </PageTransition>
         )}
 
         {appState === 'output' && (
-          <motion.div
-            key="output"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="py-12 px-4"
-          >
+          <PageTransition key="output" className="py-12 px-4">
             <PromptOutput prompt={generatedPrompt} onReset={handleReset} />
-          </motion.div>
+          </PageTransition>
         )}
       </AnimatePresence>
     </div>
