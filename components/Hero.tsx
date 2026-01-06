@@ -6,6 +6,7 @@ import Stats from './Stats';
 import HowItWorks from './HowItWorks';
 import FeaturesSection from './FeaturesSection';
 import CTA from './CTA';
+import Testimonials from './Testimonials';
 
 interface HeroProps {
   onGetStarted: () => void;
@@ -136,6 +137,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
       <Stats />
       <HowItWorks />
       <FeaturesSection />
+      <Testimonials />
       <CTA onGetStarted={onGetStarted} />
     </>
   );
