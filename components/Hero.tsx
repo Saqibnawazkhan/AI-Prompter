@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Zap, Image, FileText, Megaphone, Briefcase, Code } from 'lucide-react';
+import { Sparkles, ArrowRight, Zap, Image, FileText, Megaphone, Briefcase, Code, Cpu } from 'lucide-react';
 import Stats from './Stats';
 import HowItWorks from './HowItWorks';
 import FeaturesSection from './FeaturesSection';
+import FeatureHighlights from './FeatureHighlights';
 import CTA from './CTA';
 import Testimonials from './Testimonials';
 import FAQ from './FAQ';
@@ -165,6 +166,9 @@ export default function Hero({ onGetStarted }: HeroProps) {
 
       {/* Additional Sections */}
       <Stats />
+      <div className="py-16 px-4">
+        <FeatureHighlights />
+      </div>
       <HowItWorks />
       <FeaturesSection />
       <Testimonials />
