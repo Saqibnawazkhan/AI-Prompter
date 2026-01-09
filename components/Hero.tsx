@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Zap, Code, Cpu } from 'lucide-react';
+import { Sparkles, ArrowRight, Zap, Image, FileText, Megaphone, Briefcase, Code } from 'lucide-react';
 import Stats from './Stats';
 import HowItWorks from './HowItWorks';
 import FeaturesSection from './FeaturesSection';
@@ -67,9 +67,38 @@ export default function Hero({ onGetStarted }: HeroProps) {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto"
           >
-            Generate professional, structured development prompts for ChatGPT, Claude,
-            or any AI coding assistant. Perfect for developers, students, and product managers.
+            Generate professional prompts for Development, Image Generation, Writing, Marketing, Business, and more.
+            Perfect for any AI assistant including ChatGPT, Claude, DALL-E, and Midjourney.
           </motion.p>
+
+          {/* Category Icons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="flex justify-center gap-4 mb-8"
+          >
+            {[
+              { icon: Code, label: 'Dev', color: 'from-blue-500 to-cyan-500' },
+              { icon: Image, label: 'Image', color: 'from-purple-500 to-pink-500' },
+              { icon: FileText, label: 'Writing', color: 'from-green-500 to-emerald-500' },
+              { icon: Megaphone, label: 'Marketing', color: 'from-orange-500 to-red-500' },
+              { icon: Briefcase, label: 'Business', color: 'from-slate-500 to-gray-600' },
+            ].map((cat, index) => (
+              <motion.div
+                key={cat.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + index * 0.05 }}
+                className="flex flex-col items-center gap-1"
+              >
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center`}>
+                  <cat.icon className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{cat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
 
           {/* CTA Button */}
           <motion.div
