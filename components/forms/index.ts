@@ -5,3 +5,4 @@ export { default as MarketingPromptForm } from './MarketingPromptForm';
 export { default as BusinessPromptForm } from './BusinessPromptForm';
 export { default as EducationPromptForm } from './EducationPromptForm';
 export { default as CreativePromptForm } from './CreativePromptForm';
+export { default as DataPromptForm } from './DataPromptForm';
