@@ -2,11 +2,13 @@
 export { generateImagePrompt } from './imageGenerator';
 export { generateWritingPrompt } from './writingGenerator';
 export { generateMarketingPrompt } from './marketingGenerator';
+export { generateBusinessPrompt } from './businessGenerator';
 
-import { PromptCategory, FormData, ImageFormData, WritingFormData, MarketingFormData, DevelopmentFormData } from '@/types';
+import { PromptCategory, FormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, DevelopmentFormData } from '@/types';
 import { generateImagePrompt } from './imageGenerator';
 import { generateWritingPrompt } from './writingGenerator';
 import { generateMarketingPrompt } from './marketingGenerator';
+import { generateBusinessPrompt } from './businessGenerator';
 
 // Development prompt generator (existing)
 export function generateDevelopmentPrompt(data: DevelopmentFormData): string {
@@ -194,6 +196,8 @@ export function generatePrompt(category: PromptCategory, data: FormData): string
       return generateWritingPrompt(data as WritingFormData);
     case 'marketing':
       return generateMarketingPrompt(data as MarketingFormData);
+    case 'business':
+      return generateBusinessPrompt(data as BusinessFormData);
     default:
       return 'Prompt generation for this category is coming soon!';
   }
