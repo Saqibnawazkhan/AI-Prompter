@@ -13,6 +13,7 @@ import {
   Minimize2
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import PromptStats from './PromptStats';
 
 interface PromptOutputProps {
   prompt: string;
@@ -141,6 +142,9 @@ export default function PromptOutput({ prompt, onReset }: PromptOutputProps) {
           </div>
         </div>
       </div>
+
+      {/* Prompt Stats */}
+      <PromptStats prompt={prompt} className="mb-2" />
 
       {/* Prompt Display */}
       <div className="glass rounded-2xl overflow-hidden">
