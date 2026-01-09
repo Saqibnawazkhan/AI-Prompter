@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import CategorySelector from '@/components/CategorySelector';
 import TemplateSelector from '@/components/TemplateSelector';
+import ImageTemplateSelector from '@/components/ImageTemplateSelector';
 import StepWizard from '@/components/StepWizard';
 import PromptOutput from '@/components/PromptOutput';
 import PageTransition from '@/components/PageTransition';
@@ -13,7 +14,7 @@ import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFo
 import { generatePrompt } from '@/lib/generators';
 import { useApp } from '@/components/AppWrapper';
 
-type AppState = 'hero' | 'categories' | 'templates' | 'form' | 'output';
+type AppState = 'hero' | 'categories' | 'templates' | 'imageTemplates' | 'form' | 'output';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('hero');
@@ -40,9 +41,11 @@ export default function Home() {
 
   const handleSelectCategory = (category: PromptCategory) => {
     setSelectedCategory(category);
-    // Development category goes to templates first
+    // Development and Image categories go to templates first
     if (category === 'development') {
       setAppState('templates');
+    } else if (category === 'image') {
+      setAppState('imageTemplates');
     } else {
       setAppState('form');
     }
@@ -202,6 +205,16 @@ export default function Home() {
             <TemplateSelector
               onSelectTemplate={handleSelectTemplate}
               onSkip={handleSkipTemplates}
+            />
+          </PageTransition>
+        )}
+
+        {appState === 'imageTemplates' && (
+          <PageTransition key="imageTemplates" className="py-12">
+            <ImageTemplateSelector
+              onSelectTemplate={handleSelectTemplate}
+              onSkip={handleSkipTemplates}
+              onBack={handleBackToCategories}
             />
           </PageTransition>
         )}
