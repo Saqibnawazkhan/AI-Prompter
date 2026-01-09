@@ -3,17 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { PromptCategory, FormData } from '@/types';
-import { imageTemplates } from '@/data/imageTemplates';
-import { writingTemplates } from '@/data/writingTemplates';
-import { marketingTemplates } from '@/data/marketingTemplates';
-
-interface Template {
-  id: string;
-  name: string;
-  description: string;
-  preview: string;
-  data: Partial<FormData>;
-}
+import { getTemplatesForCategory, BaseTemplate } from '@/data/templates';
 
 interface UniversalTemplateSelectorProps {
   category: PromptCategory;
@@ -26,20 +16,8 @@ const categoryConfig: Record<string, { title: string; gradient: string }> = {
   image: { title: 'Image Generation', gradient: 'from-purple-500 to-pink-500' },
   writing: { title: 'Writing & Content', gradient: 'from-orange-500 to-red-500' },
   marketing: { title: 'Marketing', gradient: 'from-green-500 to-emerald-500' },
+  data: { title: 'Data Analysis', gradient: 'from-teal-500 to-cyan-500' },
 };
-
-function getTemplatesForCategory(category: PromptCategory): Template[] {
-  switch (category) {
-    case 'image':
-      return imageTemplates as Template[];
-    case 'writing':
-      return writingTemplates as Template[];
-    case 'marketing':
-      return marketingTemplates as Template[];
-    default:
-      return [];
-  }
-}
 
 export default function UniversalTemplateSelector({
   category,
@@ -50,7 +28,7 @@ export default function UniversalTemplateSelector({
   const templates = getTemplatesForCategory(category);
   const config = categoryConfig[category] || { title: 'Templates', gradient: 'from-purple-500 to-blue-500' };
 
-  const handleSelectTemplate = (template: Template) => {
+  const handleSelectTemplate = (template: BaseTemplate) => {
     onSelectTemplate(template.data);
   };
 
