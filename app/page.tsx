@@ -8,8 +8,8 @@ import TemplateSelector from '@/components/TemplateSelector';
 import StepWizard from '@/components/StepWizard';
 import PromptOutput from '@/components/PromptOutput';
 import PageTransition from '@/components/PageTransition';
-import { ImagePromptForm, WritingPromptForm, MarketingPromptForm, BusinessPromptForm, EducationPromptForm, CreativePromptForm } from '@/components/forms';
-import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData } from '@/types';
+import { ImagePromptForm, WritingPromptForm, MarketingPromptForm, BusinessPromptForm, EducationPromptForm, CreativePromptForm, DataPromptForm } from '@/components/forms';
+import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData, DataFormData } from '@/types';
 import { generatePrompt } from '@/lib/generators';
 import { useApp } from '@/components/AppWrapper';
 
@@ -147,6 +147,14 @@ export default function Home() {
             onComplete={(data) => handleGeneratePrompt(data as CreativeFormData)}
             onBack={handleBackToCategories}
             initialData={templateData as Partial<CreativeFormData>}
+          />
+        );
+      case 'data':
+        return (
+          <DataPromptForm
+            onComplete={(data) => handleGeneratePrompt(data as DataFormData)}
+            onBack={handleBackToCategories}
+            initialData={templateData as Partial<DataFormData>}
           />
         );
       default:
