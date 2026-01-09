@@ -5,14 +5,16 @@ export { generateMarketingPrompt } from './marketingGenerator';
 export { generateBusinessPrompt } from './businessGenerator';
 export { generateEducationPrompt } from './educationGenerator';
 export { generateCreativePrompt } from './creativeGenerator';
+export { generateDataPrompt } from './dataGenerator';
 
-import { PromptCategory, FormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData, DevelopmentFormData } from '@/types';
+import { PromptCategory, FormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData, DevelopmentFormData, DataFormData } from '@/types';
 import { generateImagePrompt } from './imageGenerator';
 import { generateWritingPrompt } from './writingGenerator';
 import { generateMarketingPrompt } from './marketingGenerator';
 import { generateBusinessPrompt } from './businessGenerator';
 import { generateEducationPrompt } from './educationGenerator';
 import { generateCreativePrompt } from './creativeGenerator';
+import { generateDataPrompt } from './dataGenerator';
 
 // Development prompt generator (existing)
 export function generateDevelopmentPrompt(data: DevelopmentFormData): string {
@@ -206,6 +208,8 @@ export function generatePrompt(category: PromptCategory, data: FormData): string
       return generateEducationPrompt(data as EducationFormData);
     case 'creative':
       return generateCreativePrompt(data as CreativeFormData);
+    case 'data':
+      return generateDataPrompt(data as DataFormData);
     default:
       return 'Prompt generation for this category is coming soon!';
   }
