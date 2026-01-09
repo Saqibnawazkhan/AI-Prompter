@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import CategorySelector from '@/components/CategorySelector';
 import TemplateSelector from '@/components/TemplateSelector';
-import ImageTemplateSelector from '@/components/ImageTemplateSelector';
+import UniversalTemplateSelector from '@/components/UniversalTemplateSelector';
 import StepWizard from '@/components/StepWizard';
+import { categoryHasTemplates } from '@/data/templates';
 import PromptOutput from '@/components/PromptOutput';
 import PageTransition from '@/components/PageTransition';
 import { ImagePromptForm, WritingPromptForm, MarketingPromptForm, BusinessPromptForm, EducationPromptForm, CreativePromptForm, DataPromptForm } from '@/components/forms';
@@ -14,7 +15,7 @@ import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFo
 import { generatePrompt } from '@/lib/generators';
 import { useApp } from '@/components/AppWrapper';
 
-type AppState = 'hero' | 'categories' | 'templates' | 'imageTemplates' | 'form' | 'output';
+type AppState = 'hero' | 'categories' | 'templates' | 'categoryTemplates' | 'form' | 'output';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('hero');
@@ -41,11 +42,11 @@ export default function Home() {
 
   const handleSelectCategory = (category: PromptCategory) => {
     setSelectedCategory(category);
-    // Development and Image categories go to templates first
+    // Development has its own templates, others use universal
     if (category === 'development') {
       setAppState('templates');
-    } else if (category === 'image') {
-      setAppState('imageTemplates');
+    } else if (categoryHasTemplates(category)) {
+      setAppState('categoryTemplates');
     } else {
       setAppState('form');
     }
@@ -209,9 +210,10 @@ export default function Home() {
           </PageTransition>
         )}
 
-        {appState === 'imageTemplates' && (
-          <PageTransition key="imageTemplates" className="py-12">
-            <ImageTemplateSelector
+        {appState === 'categoryTemplates' && (
+          <PageTransition key="categoryTemplates" className="py-12">
+            <UniversalTemplateSelector
+              category={selectedCategory}
               onSelectTemplate={handleSelectTemplate}
               onSkip={handleSkipTemplates}
               onBack={handleBackToCategories}
