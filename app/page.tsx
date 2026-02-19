@@ -33,6 +33,7 @@ export default function Home() {
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('');
   const [templateData, setTemplateData] = useState<Partial<FormData> | undefined>();
   const [currentFormData, setCurrentFormData] = useState<FormData | null>(null);
+  const [promptSource, setPromptSource] = useState<'ai' | 'template'>('template');
 
   const { addToHistory, showLoading, hideLoading, fireConfetti, selectedHistoryItem, clearSelectedHistoryItem } = useApp();
 
@@ -106,6 +107,7 @@ export default function Home() {
 
       const data = await response.json();
       prompt = data.prompt;
+      setPromptSource(data.source === 'ai' ? 'ai' : 'template');
 
       if (data.error) {
         toast(data.error, { icon: '⚠️' });
@@ -113,6 +115,7 @@ export default function Home() {
     } catch {
       // Fallback to client-side generation
       prompt = generatePrompt(selectedCategory, formData);
+      setPromptSource('template');
       toast('Using offline prompt generation', { icon: '⚠️' });
     }
 
@@ -275,7 +278,7 @@ export default function Home() {
 
         {appState === 'output' && (
           <PageTransition key="output" className="py-12 px-4">
-            <PromptOutput prompt={generatedPrompt} onReset={handleReset} onRegenerate={handleRegenerate} />
+            <PromptOutput prompt={generatedPrompt} onReset={handleReset} onRegenerate={handleRegenerate} source={promptSource} />
           </PageTransition>
         )}
       </AnimatePresence>

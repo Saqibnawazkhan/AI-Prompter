@@ -20,9 +20,10 @@ interface PromptOutputProps {
   prompt: string;
   onReset: () => void;
   onRegenerate?: () => void;
+  source?: 'ai' | 'template';
 }
 
-export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOutputProps) {
+export default function PromptOutput({ prompt, onReset, onRegenerate, source = 'template' }: PromptOutputProps) {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(prompt.length < 2000);
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
@@ -113,8 +114,13 @@ export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOu
               <Check className="w-6 h-6 text-white" />
             </motion.div>
             <div>
-              <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
                 Prompt Generated!
+                {source === 'ai' && (
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                    AI Enhanced
+                  </span>
+                )}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {wordCount} words • {charCount} chars • {lineCount} lines • {readingTime} min read
