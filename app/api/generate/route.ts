@@ -2,14 +2,28 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generatePrompt } from '@/lib/generators';
 import { PromptCategory, FormData } from '@/types';
 
+const SUPPORTED_MODELS = [
+  'llama-3.3-70b-versatile',
+  'llama-3.1-8b-instant',
+  'mixtral-8x7b-32768',
+  'gemma2-9b-it',
+] as const;
+
+type GroqModel = (typeof SUPPORTED_MODELS)[number];
+
 export async function POST(request: NextRequest) {
   let category: PromptCategory;
   let formData: FormData;
+  let model: GroqModel = 'llama-3.3-70b-versatile';
 
   try {
     const body = await request.json();
     category = body.category;
     formData = body.formData;
+
+    if (body.model && SUPPORTED_MODELS.includes(body.model)) {
+      model = body.model;
+    }
 
     if (!category || !formData) {
       return NextResponse.json(
@@ -41,7 +55,7 @@ export async function POST(request: NextRequest) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
+          model,
           messages: [
             {
               role: 'system',
@@ -87,7 +101,7 @@ Rules:
       });
     }
 
-    return NextResponse.json({ prompt: enhancedPrompt, source: 'ai' });
+    return NextResponse.json({ prompt: enhancedPrompt, source: 'ai', model });
   } catch (error) {
     console.error('Groq API request failed:', error);
     return NextResponse.json({
