@@ -11,3 +11,4 @@ export {
   useIsDarkMode,
   useIsReducedMotion,
 } from './useMediaQuery';
+export { useLocalStorage } from './useLocalStorage';
