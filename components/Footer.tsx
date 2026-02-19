@@ -38,7 +38,7 @@ export default function Footer() {
               The ultimate prompt generator for AI assistants. Create professional prompts for development, images, writing, marketing, and more.
             </p>
             <div className="flex flex-wrap gap-2">
-              {['ChatGPT', 'Claude', 'Midjourney', 'DALL-E'].map((tool) => (
+              {['ChatGPT', 'Claude', 'Groq AI', 'Midjourney', 'DALL-E'].map((tool) => (
                 <span
                   key={tool}
                   className="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-md"

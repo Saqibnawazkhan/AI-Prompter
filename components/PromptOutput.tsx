@@ -24,7 +24,7 @@ interface PromptOutputProps {
 
 export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOutputProps) {
   const [copied, setCopied] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(prompt.length < 2000);
   const [showDownloadMenu, setShowDownloadMenu] = useState(false);
 
   const handleCopy = async () => {
