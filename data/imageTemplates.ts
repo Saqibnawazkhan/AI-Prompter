@@ -103,7 +103,7 @@ export const imageTemplates: ImageTemplate[] = [
       composition: 'Center',
       aspectRatio: '1:1',
       quality: 'Vector Style',
-      negativePrompt: 'text, words, letters',
+      negativePrompts: 'text, words, letters',
     },
   },
   {

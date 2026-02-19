@@ -1,4 +1,4 @@
-import { FormData } from '@/types';
+import { DevelopmentFormData } from '@/types';
 
 export interface Template {
   id: string;
@@ -6,7 +6,7 @@ export interface Template {
   description: string;
   icon: string;
   color: string;
-  data: Partial<FormData>;
+  data: Partial<DevelopmentFormData>;
 }
 
 export const templates: Template[] = [

@@ -39,6 +39,7 @@ export interface DevelopmentFormData {
 
 // Image Generation Prompt Data
 export interface ImageFormData {
+  platform: string;
   subject: string;
   style: string;
   mood: string;
@@ -59,6 +60,7 @@ export interface WritingFormData {
   contentType: string;
   topic: string;
   tone: string;
+  audience: string;
   targetAudience: string;
   length: string;
   purpose: string;
@@ -77,6 +79,7 @@ export interface MarketingFormData {
   targetAudience: string;
   platform: string;
   tone: string;
+  objective: string;
   uniqueSellingPoints: string;
   callToAction: string;
   budget: string;

@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { templates, Template } from '@/data/templates';
-import { FormData } from '@/types';
+import { templates, Template } from '@/data/devTemplates';
+import { DevelopmentFormData } from '@/types';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface TemplateSelectorProps {
-  onSelectTemplate: (data: Partial<FormData>) => void;
+  onSelectTemplate: (data: Partial<DevelopmentFormData>) => void;
   onSkip: () => void;
 }
 

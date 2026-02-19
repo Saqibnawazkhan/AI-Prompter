@@ -11,11 +11,11 @@ import {
   Sparkles,
   Check
 } from 'lucide-react';
-import { FormData } from '@/types';
+import { DevelopmentFormData } from '@/types';
 
 interface StepWizardProps {
-  onComplete: (data: FormData) => void;
-  initialData?: Partial<FormData>;
+  onComplete: (data: DevelopmentFormData) => void;
+  initialData?: Partial<DevelopmentFormData>;
 }
 
 const appTypes = [
@@ -37,7 +37,7 @@ export default function StepWizard({ onComplete, initialData }: StepWizardProps)
   const [step, setStep] = useState(1);
   const totalSteps = 5;
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<DevelopmentFormData>({
     appType: initialData?.appType || '',
     platform: initialData?.platform || '',
     appName: initialData?.appName || '',
@@ -56,7 +56,7 @@ export default function StepWizard({ onComplete, initialData }: StepWizardProps)
     complexityLevel: initialData?.complexityLevel || 'Basic',
   });
 
-  const updateField = (field: keyof FormData, value: string) => {
+  const updateField = (field: keyof DevelopmentFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

@@ -1,9 +1,10 @@
 // Barrel export for all data
 
 // Categories
-export { categories, type CategoryInfo } from './categories';
+export { categories } from './categories';
+export { type CategoryInfo } from '@/types';
 
-// Templates
+// Category templates (image, writing, marketing, data)
 export {
   imageTemplates,
   writingTemplates,
@@ -13,13 +14,14 @@ export {
   categoryHasTemplates,
   type BaseTemplate,
   type ImageTemplate,
-  type WritingTemplate,
-  type MarketingTemplate,
-  type DataTemplate,
 } from './templates';
 
-// Development templates (from main templates.ts)
-export { templates as developmentTemplates, getTemplateById, type Template } from './templates';
+export { type WritingTemplate } from './writingTemplates';
+export { type MarketingTemplate } from './marketingTemplates';
+export { type DataTemplate } from './dataTemplates';
+
+// Development templates
+export { templates as developmentTemplates, getTemplateById, type Template } from './devTemplates';
 
 // Template counts for stats
 export const templateStats = {

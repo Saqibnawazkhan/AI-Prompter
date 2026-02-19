@@ -35,28 +35,31 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const Component = hover ? motion.div : 'div';
+    const baseClassName = cn(
+      'rounded-2xl transition-all duration-200',
+      variants[variant],
+      paddings[padding],
+      hover && 'cursor-pointer',
+      className
+    );
+
+    if (hover) {
+      return (
+        <motion.div
+          ref={ref}
+          whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+          transition={{ duration: 0.2 }}
+          className={baseClassName}
+        >
+          {children}
+        </motion.div>
+      );
+    }
 
     return (
-      <Component
-        ref={ref as React.Ref<HTMLDivElement>}
-        {...(hover
-          ? {
-              whileHover: { y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' },
-              transition: { duration: 0.2 },
-            }
-          : {})}
-        className={cn(
-          'rounded-2xl transition-all duration-200',
-          variants[variant],
-          paddings[padding],
-          hover && 'cursor-pointer',
-          className
-        )}
-        {...(props as HTMLMotionProps<"div">)}
-      >
+      <div ref={ref} className={baseClassName} {...props}>
         {children}
-      </Component>
+      </div>
     );
   }
 );

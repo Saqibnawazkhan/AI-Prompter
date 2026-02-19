@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { FormData } from '@/types';
+import { DevelopmentFormData } from '@/types';
 
 interface PromptFormProps {
-  onGenerate: (data: FormData) => void;
+  onGenerate: (data: DevelopmentFormData) => void;
 }
 
 export default function PromptForm({ onGenerate }: PromptFormProps) {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<DevelopmentFormData>({
     appType: 'Web App',
     platform: '',
     appName: '',
