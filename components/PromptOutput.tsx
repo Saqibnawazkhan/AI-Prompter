@@ -10,7 +10,8 @@ import {
   Share2,
   FileText,
   Maximize2,
-  Minimize2
+  Minimize2,
+  RotateCcw
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import PromptStats from './PromptStats';
@@ -18,9 +19,10 @@ import PromptStats from './PromptStats';
 interface PromptOutputProps {
   prompt: string;
   onReset: () => void;
+  onRegenerate?: () => void;
 }
 
-export default function PromptOutput({ prompt, onReset }: PromptOutputProps) {
+export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOutputProps) {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -129,6 +131,18 @@ export default function PromptOutput({ prompt, onReset }: PromptOutputProps) {
               <Share2 className="w-4 h-4" />
               Share
             </motion.button>
+
+            {onRegenerate && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onRegenerate}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium bg-amber-500 text-white hover:bg-amber-600 transition-all"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Regenerate
+              </motion.button>
+            )}
 
             <motion.button
               whileHover={{ scale: 1.05 }}

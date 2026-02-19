@@ -114,6 +114,12 @@ export default function Home() {
     }, 300);
   };
 
+  const handleRegenerate = () => {
+    if (currentFormData) {
+      handleGeneratePrompt(currentFormData);
+    }
+  };
+
   const handleReset = () => {
     setAppState('hero');
     setGeneratedPrompt('');
@@ -255,7 +261,7 @@ export default function Home() {
 
         {appState === 'output' && (
           <PageTransition key="output" className="py-12 px-4">
-            <PromptOutput prompt={generatedPrompt} onReset={handleReset} />
+            <PromptOutput prompt={generatedPrompt} onReset={handleReset} onRegenerate={handleRegenerate} />
           </PageTransition>
         )}
       </AnimatePresence>
