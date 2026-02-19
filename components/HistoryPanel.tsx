@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, Trash2, Copy, ChevronRight, FileText } from 'lucide-react';
+import { X, Clock, Trash2, Copy, ChevronRight, FileText, Search } from 'lucide-react';
 import { HistoryItem } from '@/hooks/useHistory';
 import EmptyState from '@/components/EmptyState';
 import toast from 'react-hot-toast';
@@ -23,6 +24,17 @@ export default function HistoryPanel({
   onDelete,
   onClear,
 }: HistoryPanelProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredHistory = useMemo(() => {
+    if (!searchQuery.trim()) return history;
+    const q = searchQuery.toLowerCase();
+    return history.filter((item) =>
+      item.prompt.toLowerCase().includes(q) ||
+      (item.category && item.category.toLowerCase().includes(q))
+    );
+  }, [history, searchQuery]);
+
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
     const now = new Date();
@@ -91,8 +103,24 @@ export default function HistoryPanel({
               </button>
             </div>
 
+            {/* Search */}
+            {history.length > 0 && (
+              <div className="px-4 pt-4">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search history..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-gray-100 dark:bg-gray-800 border-0 focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-white placeholder-gray-400"
+                  />
+                </div>
+              </div>
+            )}
+
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4" style={{ maxHeight: 'calc(100vh - 160px)' }}>
+            <div className="flex-1 overflow-y-auto p-4" style={{ maxHeight: 'calc(100vh - 220px)' }}>
               {history.length === 0 ? (
                 <EmptyState
                   icon={FileText}
@@ -101,7 +129,7 @@ export default function HistoryPanel({
                 />
               ) : (
                 <div className="space-y-3">
-                  {history.map((item) => (
+                  {filteredHistory.map((item) => (
                     <motion.div
                       key={item.id}
                       initial={{ opacity: 0, y: 10 }}
@@ -111,19 +139,20 @@ export default function HistoryPanel({
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <h3 className="font-medium text-gray-800 dark:text-white">
-                            {item.formData.appName || 'Untitled App'}
+                            {('appName' in item.formData && item.formData.appName) ||
+                             ('topic' in item.formData && item.formData.topic) ||
+                             ('subject' in item.formData && item.formData.subject) ||
+                             ('product' in item.formData && item.formData.product) ||
+                             'Untitled Prompt'}
                           </h3>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
-                            {item.formData.appType} • {item.formData.platform}
+                            {item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Prompt'} • {formatDate(item.timestamp)}
                           </p>
                         </div>
-                        <span className="text-xs text-gray-400">
-                          {formatDate(item.timestamp)}
-                        </span>
                       </div>
 
                       <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mb-3">
-                        {item.formData.appPurpose || 'No description'}
+                        {item.prompt.slice(0, 120)}...
                       </p>
 
                       <div className="flex items-center gap-2">
