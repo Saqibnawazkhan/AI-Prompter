@@ -6,7 +6,7 @@ import { Users, FileText, Sparkles, Globe, Layers, Zap } from 'lucide-react';
 const stats = [
   { icon: Layers, value: '8', label: 'Prompt Categories', color: 'text-purple-500', gradient: 'from-purple-500 to-blue-500' },
   { icon: Sparkles, value: '40+', label: 'Templates', color: 'text-yellow-500', gradient: 'from-yellow-500 to-orange-500' },
-  { icon: Zap, value: '5', label: 'AI Platforms', color: 'text-blue-500', gradient: 'from-blue-500 to-cyan-500' },
+  { icon: Zap, value: '4', label: 'AI Models', color: 'text-blue-500', gradient: 'from-blue-500 to-cyan-500' },
   { icon: Globe, value: '100%', label: 'Free & Open Source', color: 'text-green-500', gradient: 'from-green-500 to-emerald-500' },
 ];
 

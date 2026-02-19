@@ -34,7 +34,7 @@ const features = [
   {
     icon: Download,
     title: 'Export Options',
-    description: 'Download as Markdown or copy to clipboard',
+    description: 'Download as Markdown, JSON, or plain text',
     color: 'from-green-500 to-emerald-500',
   },
   {
@@ -45,8 +45,8 @@ const features = [
   },
   {
     icon: Sparkles,
-    title: 'Smart Defaults',
-    description: 'Intelligent suggestions for missing fields',
+    title: 'AI-Powered',
+    description: 'Groq AI enhances every prompt with expert insights',
     color: 'from-orange-500 to-red-500',
   },
   {

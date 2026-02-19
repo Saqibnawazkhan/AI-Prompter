@@ -19,8 +19,8 @@ const steps = [
   {
     icon: Sparkles,
     step: '3',
-    title: 'Generate',
-    description: 'Click generate and watch the magic happen',
+    title: 'AI Enhances',
+    description: 'Groq AI enhances your prompt with expert insights',
   },
   {
     icon: Copy,
