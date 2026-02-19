@@ -36,6 +36,20 @@ export default function Home() {
 
   const { addToHistory, showLoading, hideLoading, fireConfetti, selectedHistoryItem, clearSelectedHistoryItem } = useApp();
 
+  // Welcome toast for first-time visitors
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('ai-prompter-visited');
+    if (!hasVisited) {
+      setTimeout(() => {
+        toast('Welcome to AI Prompter! Your prompts are now AI-enhanced.', {
+          icon: '🚀',
+          duration: 4000,
+        });
+        localStorage.setItem('ai-prompter-visited', 'true');
+      }, 1500);
+    }
+  }, []);
+
   // Handle viewing history item
   useEffect(() => {
     if (selectedHistoryItem) {

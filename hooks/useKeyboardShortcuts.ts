@@ -8,6 +8,8 @@ interface KeyboardShortcuts {
   onCtrlN?: () => void;
   onCtrlS?: () => void;
   onCtrlH?: () => void;
+  onCtrlEnter?: () => void;
+  onCtrlC?: () => void;
 }
 
 export function useKeyboardShortcuts(shortcuts: KeyboardShortcuts) {
@@ -39,6 +41,22 @@ export function useKeyboardShortcuts(shortcuts: KeyboardShortcuts) {
         event.preventDefault();
         shortcuts.onCtrlH();
         return;
+      }
+
+      // Ctrl/Cmd + Enter (Generate/Submit)
+      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && shortcuts.onCtrlEnter) {
+        event.preventDefault();
+        shortcuts.onCtrlEnter();
+        return;
+      }
+
+      // Ctrl/Cmd + C (Copy - only when not selecting text)
+      if ((event.ctrlKey || event.metaKey) && event.key === 'c' && shortcuts.onCtrlC) {
+        const selection = window.getSelection();
+        if (!selection || selection.toString().length === 0) {
+          event.preventDefault();
+          shortcuts.onCtrlC();
+        }
       }
     },
     [shortcuts]
