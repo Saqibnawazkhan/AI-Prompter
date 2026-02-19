@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import HistoryPanel from '@/components/HistoryPanel';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ScrollToTop from '@/components/ScrollToTop';
-import { FormData } from '@/types';
+import { FormData, PromptCategory } from '@/types';
 
 interface AppWrapperProps {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ interface AppWrapperProps {
 import { createContext, useContext } from 'react';
 
 interface AppContextType {
-  addToHistory: (formData: FormData, prompt: string) => void;
+  addToHistory: (formData: FormData, prompt: string, category?: PromptCategory) => void;
   showLoading: () => void;
   hideLoading: () => void;
   fireConfetti: () => void;

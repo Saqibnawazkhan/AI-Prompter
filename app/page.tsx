@@ -104,7 +104,7 @@ export default function Home() {
 
     setGeneratedPrompt(prompt);
     setCurrentFormData(formData);
-    addToHistory(formData, prompt);
+    addToHistory(formData, prompt, selectedCategory);
 
     hideLoading();
     setAppState('output');

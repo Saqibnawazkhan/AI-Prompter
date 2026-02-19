@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FormData } from '@/types';
+import { FormData, PromptCategory } from '@/types';
 
 export interface HistoryItem {
   id: string;
   timestamp: number;
+  category?: PromptCategory;
   formData: FormData;
   prompt: string;
 }
 
 const STORAGE_KEY = 'ai-prompter-history';
-const MAX_HISTORY = 10;
+const MAX_HISTORY = 50;
 
 export function useHistory() {
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -41,10 +42,11 @@ export function useHistory() {
     }
   }, [history, isLoaded]);
 
-  const addToHistory = (formData: FormData, prompt: string) => {
+  const addToHistory = (formData: FormData, prompt: string, category?: PromptCategory) => {
     const newItem: HistoryItem = {
       id: Date.now().toString(),
       timestamp: Date.now(),
+      category,
       formData,
       prompt,
     };
