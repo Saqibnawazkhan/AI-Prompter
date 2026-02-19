@@ -14,6 +14,7 @@ import { ImagePromptForm, WritingPromptForm, MarketingPromptForm, BusinessPrompt
 import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData, DataFormData } from '@/types';
 import { generatePrompt } from '@/lib/generators';
 import { useApp } from '@/components/AppWrapper';
+import toast from 'react-hot-toast';
 
 type AppState = 'hero' | 'categories' | 'templates' | 'categoryTemplates' | 'form' | 'output';
 
@@ -69,20 +70,36 @@ export default function Home() {
   const handleGeneratePrompt = async (formData: FormData) => {
     showLoading();
 
-    // Simulate a small delay for effect
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    let prompt: string;
 
-    const prompt = generatePrompt(selectedCategory, formData);
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: selectedCategory, formData }),
+      });
+
+      if (!response.ok) throw new Error(`API returned ${response.status}`);
+
+      const data = await response.json();
+      prompt = data.prompt;
+
+      if (data.error) {
+        toast(data.error, { icon: '⚠️' });
+      }
+    } catch {
+      // Fallback to client-side generation
+      prompt = generatePrompt(selectedCategory, formData);
+      toast('Using offline prompt generation', { icon: '⚠️' });
+    }
+
     setGeneratedPrompt(prompt);
     setCurrentFormData(formData);
-
-    // Save to history
     addToHistory(formData, prompt);
 
     hideLoading();
     setAppState('output');
 
-    // Fire confetti celebration
     setTimeout(() => {
       fireConfetti();
     }, 300);
