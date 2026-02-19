@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Github, Twitter, Linkedin, ExternalLink, Code, Image, FileText, TrendingUp } from 'lucide-react';
+import { Heart, Github, Twitter, Linkedin, ExternalLink, Code, Image, FileText, TrendingUp, Briefcase, GraduationCap, Sparkles, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
@@ -11,12 +11,17 @@ export default function Footer() {
     { name: 'Image Generation', icon: Image },
     { name: 'Writing', icon: FileText },
     { name: 'Marketing', icon: TrendingUp },
+    { name: 'Business', icon: Briefcase },
+    { name: 'Education', icon: GraduationCap },
+    { name: 'Creative', icon: Sparkles },
+    { name: 'Data Analysis', icon: BarChart3 },
   ];
 
   const links = [
     { label: 'GitHub', href: 'https://github.com/Saqibnawazkhan/AI-Prompter', external: true },
     { label: 'Report Issue', href: 'https://github.com/Saqibnawazkhan/AI-Prompter/issues', external: true },
     { label: 'Contribute', href: 'https://github.com/Saqibnawazkhan/AI-Prompter/pulls', external: true },
+    { label: 'Groq AI Docs', href: 'https://console.groq.com/docs', external: true },
   ];
 
   return (
