@@ -17,7 +17,7 @@ interface HeroProps {
 export default function Hero({ onGetStarted }: HeroProps) {
   return (
     <>
-      <div className="relative overflow-hidden py-20 px-4">
+      <section aria-label="Hero" className="relative overflow-hidden py-20 px-4">
         {/* Animated Background Circles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -162,7 +162,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
             ))}
           </motion.div>
         </div>
-      </div>
+      </section>
 
       {/* Additional Sections */}
       <Stats />

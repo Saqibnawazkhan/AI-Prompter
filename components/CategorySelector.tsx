@@ -49,7 +49,7 @@ export default function CategorySelector({ onSelectCategory }: CategorySelectorP
       </motion.div>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Prompt categories">
         {categories.map((category, index) => {
           const IconComponent = iconMap[category.icon];
 
@@ -62,6 +62,8 @@ export default function CategorySelector({ onSelectCategory }: CategorySelectorP
               whileHover={{ scale: 1.03, y: -5 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => onSelectCategory(category.id)}
+              aria-label={`Select ${category.name}: ${category.description}`}
+              role="listitem"
               className="group glass p-6 rounded-2xl text-left card-hover relative overflow-hidden"
             >
               {/* Background Gradient on Hover */}
