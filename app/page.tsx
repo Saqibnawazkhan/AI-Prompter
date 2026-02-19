@@ -1,20 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '@/components/Hero';
 import CategorySelector from '@/components/CategorySelector';
-import TemplateSelector from '@/components/TemplateSelector';
-import UniversalTemplateSelector from '@/components/UniversalTemplateSelector';
-import StepWizard from '@/components/StepWizard';
-import { categoryHasTemplates } from '@/data/templates';
-import PromptOutput from '@/components/PromptOutput';
 import PageTransition from '@/components/PageTransition';
-import { ImagePromptForm, WritingPromptForm, MarketingPromptForm, BusinessPromptForm, EducationPromptForm, CreativePromptForm, DataPromptForm } from '@/components/forms';
+import { categoryHasTemplates } from '@/data/templates';
 import { PromptCategory, FormData, DevelopmentFormData, ImageFormData, WritingFormData, MarketingFormData, BusinessFormData, EducationFormData, CreativeFormData, DataFormData } from '@/types';
 import { generatePrompt } from '@/lib/generators';
 import { useApp } from '@/components/AppWrapper';
 import toast from 'react-hot-toast';
+
+// Dynamic imports for code splitting - load forms only when needed
+const TemplateSelector = dynamic(() => import('@/components/TemplateSelector'));
+const UniversalTemplateSelector = dynamic(() => import('@/components/UniversalTemplateSelector'));
+const StepWizard = dynamic(() => import('@/components/StepWizard'));
+const PromptOutput = dynamic(() => import('@/components/PromptOutput'));
+const ImagePromptForm = dynamic(() => import('@/components/forms/ImagePromptForm'));
+const WritingPromptForm = dynamic(() => import('@/components/forms/WritingPromptForm'));
+const MarketingPromptForm = dynamic(() => import('@/components/forms/MarketingPromptForm'));
+const BusinessPromptForm = dynamic(() => import('@/components/forms/BusinessPromptForm'));
+const EducationPromptForm = dynamic(() => import('@/components/forms/EducationPromptForm'));
+const CreativePromptForm = dynamic(() => import('@/components/forms/CreativePromptForm'));
+const DataPromptForm = dynamic(() => import('@/components/forms/DataPromptForm'));
 
 type AppState = 'hero' | 'categories' | 'templates' | 'categoryTemplates' | 'form' | 'output';
 
