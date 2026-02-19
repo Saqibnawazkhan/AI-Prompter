@@ -98,8 +98,8 @@ export default function FeatureHighlights({ className = '' }: FeatureHighlightsP
           transition={{ delay: 0.1 }}
           className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
         >
-          From development to data analysis, create professional prompts for any use case.
-          Works with ChatGPT, Claude, Midjourney, and more.
+          From development to data analysis, create AI-enhanced prompts for any use case.
+          Powered by Groq AI. Works with ChatGPT, Claude, Midjourney, and more.
         </motion.p>
       </div>
 
@@ -136,7 +136,7 @@ export default function FeatureHighlights({ className = '' }: FeatureHighlightsP
         className="flex flex-wrap items-center justify-center gap-4 pt-4"
       >
         <span className="text-sm text-gray-500 dark:text-gray-400">Works with:</span>
-        {['ChatGPT', 'Claude', 'Midjourney', 'DALL-E', 'Stable Diffusion'].map((tool) => (
+        {['ChatGPT', 'Claude', 'Groq AI', 'Midjourney', 'DALL-E', 'Stable Diffusion'].map((tool) => (
           <span
             key={tool}
             className="px-3 py-1.5 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg"
