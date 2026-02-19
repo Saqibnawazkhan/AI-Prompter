@@ -91,6 +91,8 @@ export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOu
 
   const wordCount = prompt.split(/\s+/).length;
   const charCount = prompt.length;
+  const lineCount = prompt.split('\n').length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
     <motion.div
@@ -115,7 +117,7 @@ export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOu
                 Prompt Generated!
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {wordCount} words • {charCount} characters
+                {wordCount} words • {charCount} chars • {lineCount} lines • {readingTime} min read
               </p>
             </div>
           </div>
