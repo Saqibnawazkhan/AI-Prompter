@@ -25,6 +25,7 @@ interface PromptOutputProps {
 export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOutputProps) {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showDownloadMenu, setShowDownloadMenu] = useState(false);
 
   const handleCopy = async () => {
     try {
@@ -37,17 +38,40 @@ export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOu
     }
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([prompt], { type: 'text/markdown' });
+  const downloadFile = (content: string, filename: string, type: string) => {
+    const blob = new Blob([content], { type });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'ai-development-prompt.md';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success('Downloaded successfully!');
+  };
+
+  const handleDownload = () => {
+    downloadFile(prompt, 'ai-prompt.md', 'text/markdown');
+    toast.success('Downloaded as Markdown!');
+  };
+
+  const handleDownloadJSON = () => {
+    const json = JSON.stringify({
+      prompt,
+      metadata: {
+        wordCount: prompt.split(/\s+/).length,
+        charCount: prompt.length,
+        generatedAt: new Date().toISOString(),
+        source: 'AI Prompter',
+      },
+    }, null, 2);
+    downloadFile(json, 'ai-prompt.json', 'application/json');
+    toast.success('Downloaded as JSON!');
+  };
+
+  const handleDownloadTxt = () => {
+    downloadFile(prompt, 'ai-prompt.txt', 'text/plain');
+    toast.success('Downloaded as Text!');
   };
 
   const handleShare = async () => {
@@ -112,15 +136,30 @@ export default function PromptOutput({ prompt, onReset, onRegenerate }: PromptOu
               {copied ? 'Copied!' : 'Copy'}
             </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleDownload}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium bg-blue-500 text-white hover:bg-blue-600 transition-all"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </motion.button>
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowDownloadMenu(!showDownloadMenu)}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl font-medium bg-blue-500 text-white hover:bg-blue-600 transition-all"
+              >
+                <Download className="w-4 h-4" />
+                Download
+              </motion.button>
+              {showDownloadMenu && (
+                <div className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-1 min-w-[160px] z-10">
+                  <button onClick={() => { handleDownload(); setShowDownloadMenu(false); }} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200">
+                    Markdown (.md)
+                  </button>
+                  <button onClick={() => { handleDownloadTxt(); setShowDownloadMenu(false); }} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200">
+                    Plain Text (.txt)
+                  </button>
+                  <button onClick={() => { handleDownloadJSON(); setShowDownloadMenu(false); }} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200">
+                    JSON (.json)
+                  </button>
+                </div>
+              )}
+            </div>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
