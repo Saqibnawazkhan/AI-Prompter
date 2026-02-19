@@ -1,13 +1,30 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 interface LoadingSpinnerProps {
   message?: string;
 }
 
-export default function LoadingSpinner({ message = 'Generating your prompt...' }: LoadingSpinnerProps) {
+const loadingTips = [
+  'AI is enhancing your prompt...',
+  'Analyzing best practices...',
+  'Adding expert insights...',
+  'Optimizing structure...',
+];
+
+export default function LoadingSpinner({ message = 'AI is crafting your prompt...' }: LoadingSpinnerProps) {
+  const [tipIndex, setTipIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTipIndex((prev) => (prev + 1) % loadingTips.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <motion.div
@@ -53,8 +70,23 @@ export default function LoadingSpinner({ message = 'Generating your prompt...' }
           ))}
         </div>
 
+        {/* Rotating Tips */}
+        <div className="mt-3 h-6 overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={tipIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="text-xs text-gray-500 dark:text-gray-400"
+            >
+              {loadingTips[tipIndex]}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+
         {/* Progress Bar */}
-        <div className="mt-6 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div className="mt-4 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
           <motion.div
             initial={{ width: '0%' }}
             animate={{ width: '100%' }}
