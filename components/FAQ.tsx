@@ -29,6 +29,14 @@ const faqs = [
     question: 'Is my data stored anywhere?',
     answer: 'No, all data stays in your browser using localStorage. We don\'t collect, store, or transmit any of your prompts or personal information.',
   },
+  {
+    question: 'How does the AI enhancement work?',
+    answer: 'AI Prompter uses Groq AI to enhance your prompts. When you generate a prompt, a base template is created from your inputs, then sent to an AI model that adds expert insights, best practices, and more specific details while preserving your original requirements.',
+  },
+  {
+    question: 'What if the AI service is unavailable?',
+    answer: 'AI Prompter has a built-in fallback system. If the AI service is temporarily unavailable, the app automatically uses its local template engine to generate your prompt. You will always get a result.',
+  },
 ];
 
 export default function FAQ() {
