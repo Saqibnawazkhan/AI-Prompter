@@ -94,7 +94,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              <span>© {currentYear} AI Prompter. Made with</span>
+              <span>© {currentYear} AI Prompter v2.0 — Made with</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}

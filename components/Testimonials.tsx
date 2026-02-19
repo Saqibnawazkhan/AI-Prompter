@@ -8,7 +8,7 @@ const testimonials = [
     name: 'Alex Chen',
     role: 'Full-Stack Developer',
     avatar: '👨‍💻',
-    content: 'AI Prompter has completely changed how I communicate with AI assistants. My prompts are now 10x more effective!',
+    content: 'The Groq AI enhancement takes my prompts to the next level. What used to be basic templates are now expert-level specifications!',
     rating: 5,
   },
   {

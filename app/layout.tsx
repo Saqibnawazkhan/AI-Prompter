@@ -11,22 +11,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Prompter - Generate Professional AI Development Prompts",
-  description: "Transform your app ideas into structured, professional AI prompts. Perfect for developers, students, and product managers using ChatGPT, Claude, or any AI coding assistant.",
-  keywords: ["AI", "prompt generator", "ChatGPT", "Claude", "development", "coding", "app builder"],
+  title: "AI Prompter - AI-Powered Prompt Generator for ChatGPT, Claude & More",
+  description: "Generate professional AI prompts enhanced by Groq AI. Create prompts for development, images, writing, marketing, and more. Free, fast, and no sign-up required.",
+  keywords: ["AI", "prompt generator", "ChatGPT", "Claude", "Groq", "development", "coding", "app builder", "image generation", "writing", "marketing"],
   authors: [{ name: "Saqib Nawaz Khan" }],
   manifest: "/manifest.json",
   themeColor: "#667eea",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   openGraph: {
-    title: "AI Prompter - Generate Professional AI Development Prompts",
-    description: "Transform your app ideas into structured, professional AI prompts.",
+    title: "AI Prompter - AI-Powered Prompt Generator",
+    description: "Generate professional AI prompts enhanced by Groq AI. Free, fast, no sign-up.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Prompter - Generate Professional AI Development Prompts",
-    description: "Transform your app ideas into structured, professional AI prompts.",
+    title: "AI Prompter - AI-Powered Prompt Generator",
+    description: "Generate professional AI prompts enhanced by Groq AI. Free, fast, no sign-up.",
   },
 };
 

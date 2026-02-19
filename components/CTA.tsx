@@ -37,7 +37,7 @@ export default function CTA({ onGetStarted }: CTAProps) {
               Ready to Build Something Amazing?
             </h2>
             <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-              Start generating professional AI prompts today. It&apos;s free, fast, and incredibly easy.
+              Create AI-enhanced prompts in seconds. Powered by Groq AI, free forever, no sign-up required.
             </p>
 
             <motion.button
