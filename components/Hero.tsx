@@ -47,7 +47,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium mb-6"
           >
             <Sparkles className="w-4 h-4" />
-            Free & Open Source
+            Powered by Groq AI — Free & Open Source
           </motion.div>
 
           {/* Main Title */}
