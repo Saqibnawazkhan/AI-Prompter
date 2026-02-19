@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Sparkles, Github, Moon, Sun, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
@@ -11,6 +12,18 @@ interface NavbarProps {
 
 export default function Navbar({ onHistoryClick, historyCount = 0 }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -35,7 +48,7 @@ export default function Navbar({ onHistoryClick, historyCount = 0 }: NavbarProps
           </motion.div>
 
           {/* Right Side */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* History Button */}
             {onHistoryClick && (
               <motion.button
@@ -44,6 +57,7 @@ export default function Navbar({ onHistoryClick, historyCount = 0 }: NavbarProps
                 onClick={onHistoryClick}
                 className="relative p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label="View history"
+                title="History (Ctrl+H)"
               >
                 <Clock className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                 {historyCount > 0 && (
@@ -61,6 +75,7 @@ export default function Navbar({ onHistoryClick, historyCount = 0 }: NavbarProps
               onClick={toggleTheme}
               className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle theme"
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? (
                 <Sun className="w-5 h-5 text-yellow-500" />
@@ -78,11 +93,21 @@ export default function Navbar({ onHistoryClick, historyCount = 0 }: NavbarProps
               rel="noopener noreferrer"
               className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="View on GitHub"
+              title="View source on GitHub"
             >
               <Github className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </motion.a>
           </div>
         </div>
+      </div>
+
+      {/* Scroll Progress Bar */}
+      <div className="h-0.5 bg-transparent">
+        <motion.div
+          className="h-full bg-gradient-to-r from-purple-500 to-blue-500"
+          style={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.1 }}
+        />
       </div>
     </motion.nav>
   );
